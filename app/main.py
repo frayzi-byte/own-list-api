@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, status, Depends, HTTPException
+from fastapi import FastAPI
 from app.routers import task_routers, user_routers
 from app.db import ping_db, init_db
 from contextlib import asynccontextmanager

@@ -2,10 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.user_model import NewUser
 from app.schemas.user_schema import UserUpdate, UserCreate
 from sqlalchemy import select
-<<<<<<< HEAD
 from app.utils.security import hash_password
-=======
->>>>>>> bd6d1a79a8de681b93ecb4914fce2b0fe4c7c6c4
 
 async def get_users(db : AsyncSession):
     result = await db.execute(select(NewUser))
@@ -16,7 +13,6 @@ async def get_user_by_id(db : AsyncSession, user_id : int):
     return result.scalar_one_or_none()
 
 async def create_user(db : AsyncSession, User : UserCreate):
-<<<<<<< HEAD
     password_hash = hash_password(
         User.password
     )
@@ -30,13 +26,11 @@ async def create_user(db : AsyncSession, User : UserCreate):
 
 
 
-=======
     db_user = NewUser(
         username = User.username,
         email = User.email,
     )
 
->>>>>>> bd6d1a79a8de681b93ecb4914fce2b0fe4c7c6c4
     db.add(db_user)
 
     await db.commit()

@@ -20,16 +20,16 @@ async def get_one_task(db, task_id : int):
     return result_from_db
 
 async def create_new_task(db, new_task):
-    if not new_task.name.strip() or new_task.name == "string":
-        raise HTTPException(status_code=400, detail="Name is required")
+    if not new_task.description.strip() or new_task.description == "string":
+        raise HTTPException(status_code=400, detail="Description is required")
     
     result_from_db = await create_task(db, new_task)
 
     return result_from_db
 
 async def change_task(db, task_id, task_data):
-    if not task_data.name or not task_data.name.strip():
-        raise HTTPException(status_code=400, detail="Name is required")
+    if not task_data.description or not task_data.description.strip():
+        raise HTTPException(status_code=400, detail="Description is required")
     
     result_from_db = await update_task(db, task_id, task_data)
 

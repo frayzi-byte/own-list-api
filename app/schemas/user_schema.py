@@ -2,11 +2,8 @@ from pydantic import BaseModel, EmailStr
 from uuid import UUID
 from datetime import datetime
 
-<<<<<<< HEAD
+
 class UserCreate(BaseModel):
-=======
-class CreateUserRequest(BaseModel):
->>>>>>> bd6d1a79a8de681b93ecb4914fce2b0fe4c7c6c4
     username: str
     email: EmailStr
     password: str
