@@ -2,12 +2,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.task_model import NewTask
 from app.schemas.task_schema import TaskSchema, TaskUpdate
 from sqlalchemy import select
+from uuid import UUID
 
 async def get_tasks(db : AsyncSession):
     result = await db.execute(select(NewTask))
     return result.scalars().all()
 
-async def get_task_by_id(db : AsyncSession, task_id : int):
+async def get_task_by_id(db : AsyncSession, task_id : UUID):
     result = await db.execute(select(NewTask).where(NewTask.id == task_id))
     return result.scalar_one_or_none()
 
@@ -35,7 +36,7 @@ async def update_task(db : AsyncSession, Task_data : TaskUpdate):
 
     return task
 
-async def delete_task(db : AsyncSession, task_id : int):
+async def delete_task(db : AsyncSession, task_id : UUID):
     result = await db.execute(select(NewTask).where(NewTask.id == task_id))
     task = result.scalar_one_or_none()
 
@@ -43,6 +44,6 @@ async def delete_task(db : AsyncSession, task_id : int):
         return None
     
     await db.delete(task)
-    await db.refresh()
+    await db.commit()
 
     return task

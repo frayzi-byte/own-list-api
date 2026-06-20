@@ -1,5 +1,5 @@
-from sqlalchemy import Column, String, Text, DateTime, Boolean, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, Text, DateTime, Boolean, ForeignKey
+from sqlalchemy import UUID as SQLAlchemyUUID
 from sqlalchemy.sql import func
 import uuid
 
@@ -8,8 +8,8 @@ from app.db import Base
 class NewTask(Base):
     __tablename__ = "tasks"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    id = Column(SQLAlchemyUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id = Column(SQLAlchemyUUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     description = Column(Text, nullable=False)
     start_date = Column(DateTime)
     end_date = Column(DateTime)
